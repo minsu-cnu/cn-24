@@ -7,7 +7,6 @@ import multiprocessing
 HOST = ''
 PORT = 8080
 
-
 def worker(conn, addr):
     with conn:
         print(f'Connected by {addr}')
@@ -60,6 +59,7 @@ def worker(conn, addr):
             header = header.encode('utf-8')
         response = header + body
         conn.sendall(response)
+        conn.close()
 
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
