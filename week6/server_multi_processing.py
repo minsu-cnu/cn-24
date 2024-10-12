@@ -18,7 +18,7 @@ def worker(conn, addr):
         method, path, protocol = request.split(' ')
         print(f'Received: {method} {path} {protocol}')
         if not data:
-            raise KeyboardInterrupt
+            return
         if path == '/':
             path = '/index.html'
         path = f'.{path}'
