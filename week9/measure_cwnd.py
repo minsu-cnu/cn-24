@@ -23,6 +23,7 @@ for ss_result in ss_results:
     target_idx = ss_result.find(']:' + client_port)
     cwnd = None
 
+    print(target_idx)
     match = re.search(r'cwnd:(\d+)', ss_result[target_idx:])
     if match:
         cwnd = int(match.group(1))
