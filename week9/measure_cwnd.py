@@ -18,6 +18,8 @@ while time.time() - start_time <= 15:
 client_port = input("Input target port number: ").strip()
 
 for ss_result in ss_results:
+    print(ss_result)
+    print(']:' + client_port)
     target_idx = ss_result.index(']:' + client_port)
     cwnd = None
 
