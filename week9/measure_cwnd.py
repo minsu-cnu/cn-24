@@ -15,7 +15,7 @@ while time.time - start_time <= 15:
     if match:
         cwnd = int(match.group(1))
     
-    x_data.append(time.time - start_time)
+    x_data.append(time.time() - start_time)
     y_data.append(cwnd if cwnd is not None else 0)
     
     time.sleep(0.3)
