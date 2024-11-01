@@ -7,7 +7,7 @@ x_data, y_data = [], []
 start_time = time.time()
 PORT = '5201'
 
-while time.time - start_time <= 15:
+while time.time() - start_time <= 15:
     result = subprocess.run(['ss', '-i', 'sport', '=', PORT], capture_output=True, text=True)
     cwnd = None
 
