@@ -7,7 +7,7 @@ x_data, y_data = [], []
 count = 1
 PORT = '5201'
 
-while count <= 15:
+while count <= 30:
     result = subprocess.run(['ss', '-i', 'sport', '=', PORT], capture_output=True, text=True)
     cwnd = None
 
@@ -19,7 +19,7 @@ while count <= 15:
     y_data.append(cwnd if cwnd is not None else 0)
     
     count += 1
-    time.sleep(1)
+    time.sleep(0.5)
 
 plt.plot(x_data, y_data)
 plt.xlabel('time (s)')
