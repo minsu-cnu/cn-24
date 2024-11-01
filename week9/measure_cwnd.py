@@ -4,10 +4,10 @@ import time
 import matplotlib.pyplot as plt
 
 x_data, y_data = [], []
-count = 1
+start_time = time.time()
 PORT = '5201'
 
-while count <= 30:
+while time.time - start_time <= 15:
     result = subprocess.run(['ss', '-i', 'sport', '=', PORT], capture_output=True, text=True)
     cwnd = None
 
@@ -15,11 +15,10 @@ while count <= 30:
     if match:
         cwnd = int(match.group(1))
     
-    x_data.append(count)
+    x_data.append(time.time - start_time)
     y_data.append(cwnd if cwnd is not None else 0)
     
-    count += 1
-    time.sleep(0.5)
+    time.sleep(0.3)
 
 plt.plot(x_data, y_data)
 plt.xlabel('time (s)')
