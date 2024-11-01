@@ -18,7 +18,7 @@ while time.time() - start_time <= 15:
     x_data.append(time.time() - start_time)
     y_data.append(cwnd if cwnd is not None else 0)
     
-    time.sleep(0.3)
+    time.sleep(0.1)
 
 plt.plot(x_data, y_data)
 plt.xlabel('time (s)')
