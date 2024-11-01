@@ -18,12 +18,9 @@ while time.time() - start_time <= 15:
 client_port = input("Input target port number: ").strip()
 
 for ss_result in ss_results:
-    print(ss_result)
-    print(']:' + client_port)
     target_idx = ss_result.find(']:' + client_port)
     cwnd = None
 
-    print(target_idx)
     match = re.search(r'cwnd:(\d+)', ss_result[target_idx:])
     if match:
         cwnd = int(match.group(1))
