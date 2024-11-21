@@ -4,16 +4,15 @@ from pydantic import BaseModel
 
 
 class PasteBase(BaseModel):
-    pass
+    title: str
 
 
 class PasteCreate(PasteBase):
-    pass
+    content: str
 
 
 class Paste(PasteBase):
     id: int
-    owner_id: int
 
     class Config:
         from_attributes = True

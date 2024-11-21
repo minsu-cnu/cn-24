@@ -19,7 +19,8 @@ class Paste(Base):
     __tablename__ = 'pastes'
 
     id = Column(Integer, primary_key=True, index=True)
-    # Need some attributes more
+    title = Column(String(length=128))
+    content = Column(String(length=128))
     owner_id = Column(Integer, ForeignKey('users.id'))
 
     owner = relationship('User', back_populates='pastes')

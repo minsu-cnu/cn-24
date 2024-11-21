@@ -44,3 +44,27 @@ def verify_user(db: Session, username: str, password: str):
         return None
 
     return db_user
+
+def create_paste(db: Session, username: str, password: str, paste: schemas.PasteCreate):
+    db_user = db.query(models.User).filter(models.User.username == username).first()
+
+    m = hashlib.sha256()
+    m.update(password.encode('utf-8'))
+    m.update(bytes.fromhex(db_user.salt))
+    password = m.hexdigest()
+    if db_user.password != password:
+        return None
+    
+    db_paste = models.Paste(title=paste.title, content=paste.content, owner=db_user)
+    db.add(db_paste)
+    db.commit()
+    db.refresh(db_paste)
+
+    return db_paste
+
+def get_pastes_by_username(db: Session, username: str):
+    db_user = db.query(models.User).filter(models.User.username == username).first()
+    if not db_user:
+        return None
+    
+    return db_user.pastes
