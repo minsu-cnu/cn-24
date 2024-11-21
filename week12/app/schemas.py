@@ -5,10 +5,11 @@ from pydantic import BaseModel
 
 class PasteBase(BaseModel):
     title: str
+    content: str
 
 
 class PasteCreate(PasteBase):
-    content: str
+    pass
 
 
 class Paste(PasteBase):
