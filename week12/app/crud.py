@@ -1,4 +1,5 @@
 import hashlib
+from fastapi import HTTPException
 import secrets
 
 from sqlalchemy.orm import Session
@@ -49,14 +50,14 @@ def create_paste(db: Session, username: str, password: str, paste: schemas.Paste
     db_user = db.query(models.User).filter(models.User.username == username).first()
 
     if db_user is None:
-        return None
+        raise HTTPException(status_code=404, detail='User not found')
 
     m = hashlib.sha256()
     m.update(password.encode('utf-8'))
     m.update(bytes.fromhex(db_user.salt))
     password = m.hexdigest()
     if db_user.password != password:
-        return None
+        raise HTTPException(status_code=404, detail='User authentication failed')
     
     db_paste = models.Paste(title=paste.title, content=paste.content, owner=db_user)
     db.add(db_paste)
