@@ -54,7 +54,7 @@ def create_paste(username: str, password: str, paste: schemas.PasteCreate, db: S
         raise HTTPException(status_code=404, detail='User authentication failed')
     return db_paste
 
-@app.get('users/{username}/pastes', response_model=List[schemas.Paste])
+@app.get('/users/{username}/pastes', response_model=List[schemas.Paste])
 def get_pastes_by_username(username: str, db: Session = Depends(get_db)):
     db_pastes = crud.get_pastes_by_username(db, username=username)
     if db_pastes is None:
