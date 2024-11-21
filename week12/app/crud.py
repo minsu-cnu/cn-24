@@ -48,6 +48,9 @@ def verify_user(db: Session, username: str, password: str):
 def create_paste(db: Session, username: str, password: str, paste: schemas.PasteCreate):
     db_user = db.query(models.User).filter(models.User.username == username).first()
 
+    if db_user is None:
+        return None
+
     m = hashlib.sha256()
     m.update(password.encode('utf-8'))
     m.update(bytes.fromhex(db_user.salt))
