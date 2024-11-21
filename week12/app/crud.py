@@ -66,9 +66,10 @@ def create_paste(db: Session, username: str, password: str, paste: schemas.Paste
 
     return db_paste
 
-def get_pastes_by_username(db: Session, username: str):
+def get_pastes_by_username(db: Session, username: str, skip: int = 0, limit: int = 100):
     db_user = db.query(models.User).filter(models.User.username == username).first()
     if not db_user:
         raise HTTPException(status_code=404, detail='User not found')
     
-    return db_user.pastes
+    return db.query(models.Paste).filter(models.Paste.owner_id == db_user.id).\
+        order_by(models.Paste.id.asc()).offset(skip).limit(limit).all()

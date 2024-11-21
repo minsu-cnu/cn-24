@@ -47,12 +47,12 @@ def verify_user(username: str, password: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail='User authentication failed')
     return db_user
 
-@app.post('/users/{username}/pastes/', response_model=schemas.Paste)
+@app.post('/users/{username}/pastes', response_model=schemas.Paste)
 def create_paste(username: str, password: str, paste: schemas.PasteCreate, db: Session = Depends(get_db)):
     db_paste = crud.create_paste(db, username=username, password=password, paste=paste)
     return db_paste
 
 @app.get('/users/{username}/pastes', response_model=List[schemas.Paste])
-def get_pastes_by_username(username: str, db: Session = Depends(get_db)):
-    db_pastes = crud.get_pastes_by_username(db, username=username)
+def get_pastes_by_username(username: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    db_pastes = crud.get_pastes_by_username(db, username=username, skip=skip, limit=limit)
     return db_pastes
