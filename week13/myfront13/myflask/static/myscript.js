@@ -1,6 +1,6 @@
 async function fetchRequestWithError() {
     try {
-      const url = `http://15.164.102.226:8080/pastebin/api/pastes`;
+      const url = `http://15.164.102.226:8080/pastebin/api/pastes/skip=0&limit=10`;
       const response = await fetch(url);
       if (response.status >= 200 && response.status < 400) {
         const data = await response.json();
