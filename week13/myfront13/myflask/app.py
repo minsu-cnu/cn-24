@@ -57,7 +57,7 @@ def create_user():
                                         data=data,
                                         headers=headers,
                                         method=method)
-        elif request.method == 'GET':
-            return render_template('createuser.html')
+        
+        return render_template('createuser.html')
 
 app.register_blueprint(bp)
