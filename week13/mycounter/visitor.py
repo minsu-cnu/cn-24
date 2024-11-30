@@ -5,7 +5,7 @@ import socketserver
 import sqlite3
 
 
-PREFIX = ''
+PREFIX = '/counter'
 
 FLAGS = _ = None
 DEBUG = False
