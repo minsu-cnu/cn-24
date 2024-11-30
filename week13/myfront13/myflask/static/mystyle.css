@@ -29,4 +29,5 @@ button {
     width: 100%;
     color: white;
     background-color: green;
+    cursor: pointer;
 }
