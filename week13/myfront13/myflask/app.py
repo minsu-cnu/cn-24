@@ -82,7 +82,7 @@ def create_paste():
         return render_template('createpaste.html')
 
 @bp.route(f'/users/<user_name>/pastes', methods=['GET'])
-def get_index(user_name):
+def get_user_pastes(user_name):
     count_pastes = 0
     url = f'{endpoint}/users/{user_name}/pastes'
     data = None
