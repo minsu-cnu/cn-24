@@ -81,4 +81,23 @@ def create_paste():
             urllib.request.urlopen(req)
         return render_template('createpaste.html')
 
+@bp.route(f'/users/<user_name>/pastes', methods=['GET'])
+def get_index(user_name):
+    count_pastes = 0
+    url = f'{endpoint}/users/{user_name}/pastes'
+    data = None
+    headers = {'Accept': 'application/json'}
+    method = 'GET'
+    req = urllib.request.Request(url=url,
+                                 data=data,
+                                 headers=headers,
+                                 method=method)
+    with urllib.request.urlopen(req) as f:
+        data = json.loads(f.read())
+        count_pastes = len(data)
+
+    return render_template('userpaste.html',
+                           count_pastes=count_pastes,
+                           user_name=user_name)
+
 app.register_blueprint(bp)
