@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, DateTime, func
 from sqlalchemy.orm import relationship
 
 from .database import Base
@@ -21,6 +21,7 @@ class Paste(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(length=128))
     content = Column(String(length=128))
+    created_at = Column(DateTime, default=func.now())
     owner_id = Column(Integer, ForeignKey('users.id'))
 
     owner = relationship('User', back_populates='pastes')

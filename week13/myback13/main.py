@@ -56,3 +56,8 @@ def create_paste(username: str, password: str, paste: schemas.PasteCreate, db: S
 def get_pastes_by_username(username: str, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     db_pastes = crud.get_pastes_by_username(db, username=username, skip=skip, limit=limit)
     return db_pastes
+
+@app.get('/pastes', response_model=List[schemas.Paste])
+def get_pastes(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    db_pastes = crud.get_pastes(db, skip=skip, limit=limit)
+    return db_pastes

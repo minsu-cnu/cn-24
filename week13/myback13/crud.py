@@ -72,4 +72,7 @@ def get_pastes_by_username(db: Session, username: str, skip: int = 0, limit: int
         raise HTTPException(status_code=404, detail='User not found')
     
     return db.query(models.Paste).filter(models.Paste.owner_id == db_user.id).\
-        order_by(models.Paste.id.asc()).offset(skip).limit(limit).all()
+        order_by(models.Paste.created_at.desc()).offset(skip).limit(limit).all()
+
+def get_pastes(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Paste).order_by(models.Paste.created_at.desc()).offset(skip).limit(limit).all()
