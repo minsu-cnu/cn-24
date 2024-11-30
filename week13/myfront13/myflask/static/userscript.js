@@ -1,5 +1,5 @@
 function getUserNameFromPath() {
-    return window.location.pathname.split('/')[2];
+    return window.location.pathname.split('/')[3];
 }
 
 function validateUserName(username) {
