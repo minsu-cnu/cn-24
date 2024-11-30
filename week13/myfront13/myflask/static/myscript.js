@@ -4,10 +4,13 @@ async function fetchRequestWithError() {
       const response = await fetch(url);
       if (response.status >= 200 && response.status < 400) {
         const data = await response.json();
+        pdiv = document.getElementById('pastes');
+        while (pdiv.firstChild) {
+          pdiv.removeChild(pdiv.firstChild);
+        }
         for (var key in data) {
           ndiv = document.createElement('div');
           ndiv.innerHTML = `<h3> ${data[key]['title']} </h3><p> ${data[key]['content']}</p><hr>`;
-          pdiv = document.getElementById('pastes');
           pdiv.appendChild(ndiv);
         }
       } else {
