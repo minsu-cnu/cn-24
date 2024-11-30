@@ -8,7 +8,7 @@ endpoint = 'http://15.164.102.226:8080/pastebin/api'
 app = Flask(__name__)
 bp = Blueprint('mybp', __name__, 
                static_folder='static',
-               static_url_path='/pastebin/static',
+               static_url_path='/static',
                template_folder='templates',
                url_prefix='/pastebin')
 
