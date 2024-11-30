@@ -8,3 +8,21 @@ h1 {
     color: darkblue;
     border-bottom: 1px solid gray;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    width: 100%;
+    border: 3px solid white;
+}
+
+input {
+    padding: 10px 20px;
+}
+
+.submit {
+    width: 100%;
+    color: white;
+    background-color: green;
+}
