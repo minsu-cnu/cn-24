@@ -16,7 +16,7 @@ bp = Blueprint('mybp', __name__,
 @bp.route(f'/index.html', methods=['GET'])
 def get_index():
     count_users = 0
-    url = f'{endpoint}/users/'
+    url = f'{endpoint}/users'
     data = None
     headers = {'Accept': 'application/json'}
     method = 'GET'
@@ -29,7 +29,7 @@ def get_index():
         count_users = len(data)
 
     count_pastes = 0
-    url = f'{endpoint}/pastes/'
+    url = f'{endpoint}/pastes'
     data = None
     headers = {'Accept': 'application/json'}
     method = 'GET'
