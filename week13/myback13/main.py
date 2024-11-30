@@ -18,7 +18,7 @@ def get_db():
         db.close()
 
 
-@app.post('/users/', response_model=schemas.User)
+@app.post('/users', response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db_user = crud.get_user_by_username(db, username=user.username)
     if db_user:
@@ -26,7 +26,7 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     return crud.create_user(db=db, user=user)
 
 
-@app.get('/users/', response_model=List[schemas.User])
+@app.get('/users', response_model=List[schemas.User])
 def get_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     users = crud.get_users(db, skip=skip, limit=limit)
     return users
@@ -40,7 +40,7 @@ def get_user(username: str, db: Session = Depends(get_db)):
     return db_user
 
 
-@app.get('/users/{username}/verify/', response_model=schemas.UserDetail)
+@app.get('/users/{username}/verify', response_model=schemas.UserDetail)
 def verify_user(username: str, password: str, db: Session = Depends(get_db)):
     db_user = crud.verify_user(db, username=username, password=password)
     if db_user is None:
