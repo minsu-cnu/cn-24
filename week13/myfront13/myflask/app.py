@@ -63,4 +63,22 @@ def create_user():
             urllib.request.urlopen(req)
         return render_template('createuser.html')
 
+@bp.route(f'/createpaste', methods=['GET', 'POST'])
+def create_user():
+        if request.method == 'POST':
+            url = f'{endpoint}/users/{request.form['username']}/pastes?password={request.form['password']}'
+
+            data = {'title': request.form['title'],
+                    'content': request.form['content']}
+            data = json.dumps(data).encode('utf-8')
+
+            headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            method = 'POST'
+            req = urllib.request.Request(url=url,
+                                        data=data,
+                                        headers=headers,
+                                        method=method)
+            urllib.request.urlopen(req)
+        return render_template('createpaste.html')
+
 app.register_blueprint(bp)
