@@ -48,7 +48,7 @@ def get_index():
 @bp.route(f'/createuser', methods=['GET', 'POST'])
 def create_user():
         if request.method == 'POST':
-            url = f'{endpoint}/users/'
+            url = f'{endpoint}/users'
             data = {'username': request.form['username'],
                     'password': request.form['password']}
             headers = {'Accept': 'application/json'}
