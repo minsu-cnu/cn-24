@@ -49,10 +49,10 @@ def get_index():
 def create_user():
         if request.method == 'POST':
             url = f'{endpoint}/users'
-            
+
             data = {'username': request.form['username'],
                     'password': request.form['password']}
-            data = urllib.parse.urlencode(data).encode('utf-8')
+            data = json.dumps(data).encode('utf-8')
 
             headers = {'Accept': 'application/json'}
             method = 'POST'
