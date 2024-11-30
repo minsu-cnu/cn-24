@@ -64,7 +64,7 @@ def create_user():
         return render_template('createuser.html')
 
 @bp.route(f'/createpaste', methods=['GET', 'POST'])
-def create_user():
+def create_paste():
         if request.method == 'POST':
             url = f'{endpoint}/users/{request.form['username']}/pastes?password={request.form['password']}'
 
