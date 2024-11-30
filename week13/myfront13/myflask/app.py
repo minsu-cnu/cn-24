@@ -1,6 +1,6 @@
-from flask import Flask, Blueprint, render_template, request  # Flask 및 관련 모듈
-import urllib.request  # HTTP 요청을 위해
-import json  # JSON 데이터를 다루기 위해
+from flask import Flask, Blueprint, render_template, request
+import urllib.request
+import json
 
 
 endpoint = 'http://15.164.102.226:8080/pastebin/api'
