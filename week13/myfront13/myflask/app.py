@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template  # Flask 및 관련 모듈
+from flask import Flask, Blueprint, render_template, request  # Flask 및 관련 모듈
 import urllib.request  # HTTP 요청을 위해
 import json  # JSON 데이터를 다루기 위해
 
@@ -44,5 +44,20 @@ def get_index():
     return render_template('index.html', 
                            count_users=count_users,
                            count_pastes=count_pastes)
+
+@bp.route(f'/createuser', methods=['GET', 'POST'])
+def create_user():
+        if request.method == 'POST':
+            url = f'{endpoint}/users/'
+            data = {'username': request.form['username'],
+                    'password': request.form['password']}
+            headers = {'Accept': 'application/json'}
+            method = 'POST'
+            req = urllib.request.Request(url=url,
+                                        data=data,
+                                        headers=headers,
+                                        method=method)
+        elif request.method == 'GET':
+            return render_template('createuser.html')
 
 app.register_blueprint(bp)
