@@ -43,8 +43,6 @@ def get_user(username: str, db: Session = Depends(get_db)):
 @app.get('/users/{username}/verify', response_model=schemas.UserDetail)
 def verify_user(username: str, password: str, db: Session = Depends(get_db)):
     db_user = crud.verify_user(db, username=username, password=password)
-    if db_user is None:
-        raise HTTPException(status_code=404, detail='User authentication failed')
     return db_user
 
 @app.post('/users/{username}/pastes', response_model=schemas.Paste)

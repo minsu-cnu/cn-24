@@ -36,19 +36,21 @@ def create_user(db: Session, user: schemas.UserCreate):
 
 def verify_user(db: Session, username: str, password: str):
     db_user = db.query(models.User).filter(models.User.username == username).first()
+    if db_user is None:
+        raise HTTPException(status_code=404, detail='User not found')
+
 
     m = hashlib.sha256()
     m.update(password.encode('utf-8'))
     m.update(bytes.fromhex(db_user.salt))
     password = m.hexdigest()
     if db_user.password != password:
-        return None
+        raise HTTPException(status_code=404, detail='User authentication failed')
 
     return db_user
 
 def create_paste(db: Session, username: str, password: str, paste: schemas.PasteCreate):
     db_user = db.query(models.User).filter(models.User.username == username).first()
-
     if db_user is None:
         raise HTTPException(status_code=404, detail='User not found')
 

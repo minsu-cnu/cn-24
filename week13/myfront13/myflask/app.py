@@ -57,7 +57,7 @@ def create_user():
                                         data=data,
                                         headers=headers,
                                         method=method)
-        
+            urllib.request.urlopen(req)
         return render_template('createuser.html')
 
 app.register_blueprint(bp)
