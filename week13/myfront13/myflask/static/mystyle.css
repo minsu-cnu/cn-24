@@ -1,6 +1,7 @@
 html {
     height: 100%;
     background-color: lightgreen;
+    box-sizing: border-box;
 }
 
 h1 {
@@ -24,6 +25,7 @@ input {
 
 button {
     margin-top: 10px;
+    padding: 10px;
     width: 100%;
     color: white;
     background-color: green;
