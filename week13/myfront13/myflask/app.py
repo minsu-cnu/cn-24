@@ -46,3 +46,6 @@ def get_index():
                            count_pastes=count_pastes)
 
 app.register_blueprint(bp)
+
+if __name__ == '__main__':
+    app.run(debug=True)
