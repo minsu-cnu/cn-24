@@ -54,7 +54,7 @@ def create_user():
                     'password': request.form['password']}
             data = json.dumps(data).encode('utf-8')
 
-            headers = {'Accept': 'application/json'}
+            headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
             method = 'POST'
             req = urllib.request.Request(url=url,
                                         data=data,
