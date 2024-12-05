@@ -13,7 +13,7 @@ async function fetchRequestWithError() {
     try {
       const username = getUserNameFromPath();
       validateUserName(username);
-      const url = `https://15.164.102.226:8443/pastebin/api/users/` + username + `/pastes?skip=0&limit=10`;
+      const url = `https://pastebin.mydomain.aws:8443/pastebin/api/users/` + username + `/pastes?skip=0&limit=10`;
       const response = await fetch(url);
       if (response.status >= 200 && response.status < 400) {
         const data = await response.json();
