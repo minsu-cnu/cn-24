@@ -4,7 +4,7 @@ import json
 import ssl
 
 
-endpoint = 'https://pastebin.mydomain.aws:8443/pastebin/api'
+endpoint = 'https://15.164.102.226:8443/pastebin/api'
 CERT = '/media/pastebinCA.crt'
 
 app = Flask(__name__)
