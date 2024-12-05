@@ -13,8 +13,9 @@ bp = Blueprint('mybp', __name__,
                static_url_path='/static',
                template_folder='templates',
                url_prefix='/pastebin')
-context = ssl.create_default_context()
-context.load_verify_locations(CERT)
+# context = ssl.create_default_context()
+# context.load_verify_locations(CERT)
+context = ssl._create_unverified_context()
 
 @bp.route(f'/', methods=['GET'])
 @bp.route(f'/index.html', methods=['GET'])
