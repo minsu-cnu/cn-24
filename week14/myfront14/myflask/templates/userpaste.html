@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>My Paste Bin - User Pastes</title>
+    <link rel="stylesheet" href="{{ url_for('mybp.static', filename='mystyle.css') }}">
+    </head>
+    <body>
+        <h1>{{ count_pastes }} pastes by {{ user_name }} </h1>
+        <div id='pastes'>
+        </div>
+    </body>
+    <script src="{{ url_for('mybp.static', filename='userscript.js') }}"></script>
+</html>
