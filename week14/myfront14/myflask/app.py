@@ -1,9 +1,11 @@
 from flask import Flask, Blueprint, render_template, request
 import urllib.request
 import json
+import ssl
 
 
 endpoint = 'https://15.164.102.226:8443/pastebin/api'
+CERT = 'pastebinCA.crt'
 
 app = Flask(__name__)
 bp = Blueprint('mybp', __name__, 
@@ -11,6 +13,8 @@ bp = Blueprint('mybp', __name__,
                static_url_path='/static',
                template_folder='templates',
                url_prefix='/pastebin')
+context = ssl.create_default_context()
+context.load_verify_locations(CERT)
 
 @bp.route(f'/', methods=['GET'])
 @bp.route(f'/index.html', methods=['GET'])
@@ -24,7 +28,8 @@ def get_index():
                                  data=data,
                                  headers=headers,
                                  method=method)
-    with urllib.request.urlopen(req) as f:
+    
+    with urllib.request.urlopen(req, context=context) as f:
         data = json.loads(f.read())
         count_users = len(data)
 
@@ -37,7 +42,7 @@ def get_index():
                                  data=data,
                                  headers=headers,
                                  method=method)
-    with urllib.request.urlopen(req) as f:
+    with urllib.request.urlopen(req, context=context) as f:
         data = json.loads(f.read())
         count_pastes = len(data)
 
@@ -60,7 +65,7 @@ def create_user():
                                         data=data,
                                         headers=headers,
                                         method=method)
-            urllib.request.urlopen(req)
+            urllib.request.urlopen(req, context=context)
         return render_template('createuser.html')
 
 @bp.route(f'/createpaste', methods=['GET', 'POST'])
@@ -78,7 +83,7 @@ def create_paste():
                                         data=data,
                                         headers=headers,
                                         method=method)
-            urllib.request.urlopen(req)
+            urllib.request.urlopen(req, context=context)
         return render_template('createpaste.html')
 
 @bp.route(f'/users/<user_name>/pastes', methods=['GET'])
@@ -92,7 +97,7 @@ def get_user_pastes(user_name):
                                  data=data,
                                  headers=headers,
                                  method=method)
-    with urllib.request.urlopen(req) as f:
+    with urllib.request.urlopen(req, context=context) as f:
         data = json.loads(f.read())
         count_pastes = len(data)
 
